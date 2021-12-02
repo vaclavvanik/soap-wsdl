@@ -75,6 +75,10 @@ $fileProvider2 = new Wsdl\FileProvider('/should-be-reachable/my-file.wsdl');
 $wsdl = (new Wsdl\ChainProvider($fileProvider1, $fileProvider2))->provide();
 ```
 
+### HttpProvider
+
+HttpProvider is in separate package [vaclavvanik/soap-wsdl-http](https://github.com/vaclavvanik/soap-wsdl-http).
+
 ## Exceptions
 
 provide methods throw:
