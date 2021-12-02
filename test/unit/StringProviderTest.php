@@ -26,4 +26,13 @@ final class StringProviderTest extends TestCase
 
         (new StringProvider(''))->provide();
     }
+
+    public function testResource(): void
+    {
+        $wsdl = '<root/>';
+
+        $provider = new StringProvider($wsdl);
+
+        $this->assertSame($wsdl, $provider->resource());
+    }
 }
