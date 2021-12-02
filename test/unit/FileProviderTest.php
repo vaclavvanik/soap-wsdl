@@ -31,7 +31,9 @@ final class FileProviderTest extends TestCase
             ->withContent($content)
             ->at($this->vfs);
 
-        $provider = new FileProvider($this->vfs->url() . '/' . $file);
+        $path = $this->vfs->url() . '/' . $file;
+
+        $provider = new FileProvider($path);
 
         $this->assertSame($content, $provider->provide());
     }
@@ -49,15 +51,13 @@ final class FileProviderTest extends TestCase
         $this->expectException(File::class);
 
         $file = 'not-exists.wsdl';
+        $path = $this->vfs->url() . '/' . $file;
 
-        (new FileProvider($this->vfs->url() . '/' . $file))->provide();
+        (new FileProvider($path))->provide();
     }
 
     public function testThrowEmptyContentExceptionIfEmptyData(): void
     {
-        $this->expectException(EmptyContent::class);
-        $this->expectExceptionMessageMatches('/WSDL \(.*\) has empty content/');
-
         $file = 'empty.wsdl';
         $content = '';
 
@@ -65,6 +65,27 @@ final class FileProviderTest extends TestCase
             ->withContent($content)
             ->at($this->vfs);
 
-        (new FileProvider($this->vfs->url() . '/' . $file))->provide();
+        $path = $this->vfs->url() . '/' . $file;
+
+        $this->expectException(EmptyContent::class);
+        $this->expectExceptionMessage('WSDL (' . $path . ') has empty content');
+
+        (new FileProvider($path))->provide();
+    }
+
+    public function testResource(): void
+    {
+        $file = 'my.wsdl';
+        $content = '<root/>';
+
+        vfsStream::newFile($file, 0600)
+            ->withContent($content)
+            ->at($this->vfs);
+
+        $path = $this->vfs->url() . '/' . $file;
+
+        $provider = new FileProvider($path);
+
+        $this->assertSame($path, $provider->resource());
     }
 }

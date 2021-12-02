@@ -6,7 +6,7 @@ namespace VaclavVanik\Soap\Wsdl;
 
 use function file_get_contents;
 
-final class FileProvider implements WsdlProvider
+final class FileProvider implements WsdlResourceProvider
 {
     /** @var string */
     private $file;
@@ -34,5 +34,10 @@ final class FileProvider implements WsdlProvider
         Utils::checkWsdl($wsdl, $this->file);
 
         return $wsdl;
+    }
+
+    public function resource(): string
+    {
+        return $this->file;
     }
 }
