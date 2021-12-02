@@ -6,6 +6,10 @@ namespace VaclavVanik\Soap\Wsdl;
 
 interface WsdlResourceProvider extends WsdlProvider
 {
-    /** @throws Exception\Exception */
+    /**
+     * Returns resource name for caching
+     *
+     * @throws Exception\Exception if any error occurs.
+     */
     public function resource(): string;
 }

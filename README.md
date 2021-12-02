@@ -14,7 +14,7 @@ composer require vaclavvanik/soap-wsdl
 
 ### StringProvider
 
-Provides WSDL from string variable.
+Returns WSDL from string variable.
 
 ```php
 <?php
@@ -28,7 +28,7 @@ $wsdl = (new Wsdl\StringProvider('wsdl-in-string-variable'))->provide();
 
 ### FileProvider
 
-Provides WSDL from file.
+Returns WSDL from file.
 
 ```php
 <?php
@@ -42,7 +42,7 @@ $wsdl = (new Wsdl\FileProvider('my-file.wsdl'))->provide();
 
 ### CacheFileProvider
 
-Loads and save $wsdl from delegated WsdlProvider to cache file.
+Loads and save $wsdl from delegated [WsdlResourceProvider](src/WsdlResourceProvider.php) to cache file.
 
 ```php
 <?php
@@ -60,7 +60,7 @@ $wsdl = (new Wsdl\CacheFileProvider($fileProvider, $directory, $ttl))->provide()
 
 ### ChainProvider
 
-Provides WSDL from first available WsdlProvider.
+Returns WSDL from first available [WsdlProvider](src/WsdlProvider.php).
 
 ```php
 <?php
