@@ -20,9 +20,6 @@
   "require": {
     "php": "^7.3 || ^8.0"
   },
-  "require-dev": {
-
-  },
   "autoload": {
     "psr-4": {
       "VaclavVanik\\Soap\\Wsdl\\": "src/"
