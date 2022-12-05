@@ -45,7 +45,11 @@ final class ChainProviderTest extends TestCase
         ];
     }
 
-    /** @dataProvider provideProvide */
+    /**
+     * @param array<int, WsdlProvider> $providers
+     *
+     * @dataProvider provideProvide
+     */
     public function testProvide(string $wsdl, array $providers): void
     {
         $this->assertSame($wsdl, (new ChainProvider(...$providers))->provide());
